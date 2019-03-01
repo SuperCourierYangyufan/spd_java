@@ -1,0 +1,45 @@
+spring:
+    druid:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://120.79.10.101:3306/spd
+        username: root
+        password: admin
+        #最大连接,最小连接,获取连接的最大等待
+        maxActive: 30
+        minIdle: 5
+        maxWait: 10000
+        #解决mysql18消失问题,空闲连接检查间隔,空闲连接最小空闲时间
+        validationQuery: SELECT 'x'
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+    rabbitmq:
+      host: 120.79.10.101
+      username: spd
+      password: spd
+      port: 5672
+    redis:
+      host: 120.79.10.101
+      port: 6379
+mybatis:
+    mapper-locations: classpath:mybatis/mapper/*.xml
+    config-location: classpath:mybatis/mybatis-config.xml
+    type-aliases-package: com.my.spd.pojo
+server:
+  port: 8081
+logging:
+  file: src\main\resources\log\spd.log
+  level:
+    com.my.spd.dao : debug
+#    pageHelp
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+# 常量信息
+com:
+  my:
+    spd:
+      pageSize: 10
+      successCode: 0
+      failCode: 1

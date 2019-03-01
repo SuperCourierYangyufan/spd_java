@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.spd.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.my.spd.pojo.Menu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menuName" jdbcType="VARCHAR" property="menuname" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="parentName" jdbcType="VARCHAR" property="parentname" />
+    <result column="pathName" jdbcType="VARCHAR" property="pathname" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="isshow" jdbcType="VARCHAR" property="isshow" />
+    <result column="roleId" jdbcType="INTEGER" property="roleid" />
+    <result column="isTop" jdbcType="VARCHAR" property="istop" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, menuName, parentId, parentName, pathName, sort, href, isshow, roleId, isTop, 
+    icon
+  </sql>
+  <select id="selectByExample" parameterType="com.my.spd.pojo.MenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.my.spd.pojo.MenuExample">
+    delete from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.my.spd.pojo.Menu">
+    insert into menu (id, menuName, parentId, 
+      parentName, pathName, sort, 
+      href, isshow, roleId, 
+      isTop, icon)
+    values (#{id,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{parentname,jdbcType=VARCHAR}, #{pathname,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{href,jdbcType=VARCHAR}, #{isshow,jdbcType=VARCHAR}, #{roleid,jdbcType=INTEGER}, 
+      #{istop,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.spd.pojo.Menu">
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="menuname != null">
+        menuName,
+      </if>
+      <if test="parentid != null">
+        parentId,
+      </if>
+      <if test="parentname != null">
+        parentName,
+      </if>
+      <if test="pathname != null">
+        pathName,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="href != null">
+        href,
+      </if>
+      <if test="isshow != null">
+        isshow,
+      </if>
+      <if test="roleid != null">
+        roleId,
+      </if>
+      <if test="istop != null">
+        isTop,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null">
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null">
+        #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="pathname != null">
+        #{pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="href != null">
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null">
+        #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null">
+        #{istop,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.my.spd.pojo.MenuExample" resultType="java.lang.Long">
+    select count(*) from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <update id="updateByExampleSelective" parameterType="map">
+    update menu
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuname != null">
+        menuName = #{record.menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null">
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentname != null">
+        parentName = #{record.parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pathname != null">
+        pathName = #{record.pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.href != null">
+        href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshow != null">
+        isshow = #{record.isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleid != null">
+        roleId = #{record.roleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.istop != null">
+        isTop = #{record.istop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update menu
+    set id = #{record.id,jdbcType=INTEGER},
+      menuName = #{record.menuname,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      parentName = #{record.parentname,jdbcType=VARCHAR},
+      pathName = #{record.pathname,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      href = #{record.href,jdbcType=VARCHAR},
+      isshow = #{record.isshow,jdbcType=VARCHAR},
+      roleId = #{record.roleid,jdbcType=INTEGER},
+      isTop = #{record.istop,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.my.spd.pojo.Menu">
+    update menu
+    <set>
+      <if test="menuname != null">
+        menuName = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="parentname != null">
+        parentName = #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="pathname != null">
+        pathName = #{pathname,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="href != null">
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null">
+        isshow = #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        roleId = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null">
+        isTop = #{istop,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.my.spd.pojo.Menu">
+    update menu
+    set menuName = #{menuname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      parentName = #{parentname,jdbcType=VARCHAR},
+      pathName = #{pathname,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      href = #{href,jdbcType=VARCHAR},
+      isshow = #{isshow,jdbcType=VARCHAR},
+      roleId = #{roleid,jdbcType=INTEGER},
+      isTop = #{istop,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectInfoNum" resultType="com.my.spd.pojo.Menu">
+    SELECT roleId,isTop,isshow FROM menu
+  </select>
+  <select id="selectMaxSort" resultType="java.lang.Integer">
+    SELECT MAX(sort) as sort from menu
+  </select>
+</mapper>
