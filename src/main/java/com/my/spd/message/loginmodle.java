@@ -12,7 +12,7 @@ import java.util.List;
 public  class loginmodle {
     private  String code;
     private  String message;
-    private  User user;
+    private User user;
     private List<List<Menu>> menuList;
     private List<Role> roleList;
 

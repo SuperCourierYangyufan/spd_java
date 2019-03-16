@@ -634,6 +634,126 @@ public class UserExample {
             addCriterion("iconimg not between", value1, value2, "iconimg");
             return (Criteria) this;
         }
+
+        public Criteria andHospitalidIsNull() {
+            addCriterion("hospitalId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidIsNotNull() {
+            addCriterion("hospitalId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidEqualTo(Integer value) {
+            addCriterion("hospitalId =", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidNotEqualTo(Integer value) {
+            addCriterion("hospitalId <>", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidGreaterThan(Integer value) {
+            addCriterion("hospitalId >", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("hospitalId >=", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidLessThan(Integer value) {
+            addCriterion("hospitalId <", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidLessThanOrEqualTo(Integer value) {
+            addCriterion("hospitalId <=", value, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidIn(List<Integer> values) {
+            addCriterion("hospitalId in", values, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidNotIn(List<Integer> values) {
+            addCriterion("hospitalId not in", values, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidBetween(Integer value1, Integer value2) {
+            addCriterion("hospitalId between", value1, value2, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalidNotBetween(Integer value1, Integer value2) {
+            addCriterion("hospitalId not between", value1, value2, "hospitalid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneIsNull() {
+            addCriterion("phone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneIsNotNull() {
+            addCriterion("phone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneEqualTo(Integer value) {
+            addCriterion("phone =", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNotEqualTo(Integer value) {
+            addCriterion("phone <>", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneGreaterThan(Integer value) {
+            addCriterion("phone >", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneGreaterThanOrEqualTo(Integer value) {
+            addCriterion("phone >=", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneLessThan(Integer value) {
+            addCriterion("phone <", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneLessThanOrEqualTo(Integer value) {
+            addCriterion("phone <=", value, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneIn(List<Integer> values) {
+            addCriterion("phone in", values, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNotIn(List<Integer> values) {
+            addCriterion("phone not in", values, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneBetween(Integer value1, Integer value2) {
+            addCriterion("phone between", value1, value2, "phone");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhoneNotBetween(Integer value1, Integer value2) {
+            addCriterion("phone not between", value1, value2, "phone");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

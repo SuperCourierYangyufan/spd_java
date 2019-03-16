@@ -20,6 +20,10 @@ public class User implements Serializable {
 
     private String iconimg;
 
+    private Integer hospitalid;
+
+    private Integer phone;
+
     public Integer getId() {
         return id;
     }
@@ -82,5 +86,21 @@ public class User implements Serializable {
 
     public void setIconimg(String iconimg) {
         this.iconimg = iconimg == null ? null : iconimg.trim();
+    }
+
+    public Integer getHospitalid() {
+        return hospitalid;
+    }
+
+    public void setHospitalid(Integer hospitalid) {
+        this.hospitalid = hospitalid;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
     }
 }

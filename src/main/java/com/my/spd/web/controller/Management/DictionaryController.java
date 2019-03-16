@@ -37,7 +37,6 @@ public class DictionaryController {
         }
     }
 
-
     @ApiOperation(value = "根据字典查询条件,查询字典列表",httpMethod = "POST")
     @PostMapping("/searchDictionary")
     public MessageModel searchDictionary(@ApiParam(name = "dictionary",value = "字典表查询条件JSON对象") @RequestBody DictionarySo dictionarySo){

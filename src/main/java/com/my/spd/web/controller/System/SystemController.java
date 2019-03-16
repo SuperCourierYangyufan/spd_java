@@ -34,60 +34,59 @@ public class SystemController {
     private SystemServiceImpl systemService;
 
 
-
-    @ApiOperation(value = "用户登入",httpMethod = "POST")
+    @ApiOperation(value = "用户登入", httpMethod = "POST")
     @PostMapping("/login")
-    public loginmodle login(@ApiParam(name = "user",value = "用户对象") @RequestBody User user, HttpServletRequest request){
+    public loginmodle login(@ApiParam(name = "user", value = "用户对象") @RequestBody User user, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
-        if(!subject.isAuthenticated()){
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
+        if (!subject.isAuthenticated()) {
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             token.setRememberMe(true); //设置记住我
             try {
                 subject.login(token); //传入realm
-            }catch (AuthenticationException e){
+            } catch (AuthenticationException e) {
                 return loginmodle.fail(e.getMessage());
             }
         }
         //用户信息
         User currentUser = systemService.getUser();
-        if(currentUser == null){
+        if (currentUser == null) {
             return loginmodle.fail("用户出现异常");
         }
         //获取菜单
         List<List<Menu>> menuList = systemService.getCurrentUserMenuList();
-        if(menuList == null){
+        if (menuList == null) {
             return loginmodle.fail("菜单出现异常");
         }
         //获取role对象
-        List<Role> roleList =  systemService.getCurrentUserRole();
-        if(roleList == null){
+        List<Role> roleList = systemService.getCurrentUserRole();
+        if (roleList == null) {
             return loginmodle.fail("权限列表出现异常");
         }
-        return loginmodle.success(currentUser,menuList,roleList); //成功
+        return loginmodle.success(currentUser, menuList, roleList); //成功
     }
 
-    @ApiOperation(value = "用户登出",httpMethod = "GET")
+    @ApiOperation(value = "用户登出", httpMethod = "GET")
     @GetMapping("/logout")
-    public MessageModel logout(){
+    public MessageModel logout() {
         try {
             systemService.removeUser();
             Subject subject = SecurityUtils.getSubject();
             subject.logout();
-        }catch (Exception e){
+        } catch (Exception e) {
             return MessageModel.fail(e.getMessage());
         }
         return MessageModel.success(null);
     }
 
-    @ApiOperation(value = "获取所有角色权限",httpMethod = "GET")
+    @ApiOperation(value = "获取所有角色权限", httpMethod = "GET")
     @GetMapping("/getRoleAll")
-    public MessageModel getRoleAll(){
+    public MessageModel getRoleAll() {
         return MessageModel.success(systemService.getRoleAll());
     }
 
-    @ApiOperation(value = "权限异常",httpMethod = "GET")
+    @ApiOperation(value = "权限异常", httpMethod = "GET")
     @GetMapping("/notPermission")
-    public MessageModel notPermission(){
+    public MessageModel notPermission() {
         return MessageModel.fail("您没有对应的权限");
     }
 
