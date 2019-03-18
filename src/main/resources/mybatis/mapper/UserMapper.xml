@@ -11,7 +11,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="iconimg" jdbcType="VARCHAR" property="iconimg" />
     <result column="hospitalId" jdbcType="INTEGER" property="hospitalid" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -112,7 +112,7 @@
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=INTEGER}, #{iconimg,jdbcType=VARCHAR}, #{hospitalid,jdbcType=INTEGER}, 
-      #{phone,jdbcType=INTEGER})
+      #{phone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.my.spd.pojo.User">
     insert into user
@@ -177,7 +177,7 @@
         #{hospitalid,jdbcType=INTEGER},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -187,8 +187,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-
-    <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map">
     update user
     <set>
       <if test="record.id != null">
@@ -219,7 +218,7 @@
         hospitalId = #{record.hospitalid,jdbcType=INTEGER},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -237,7 +236,7 @@
       status = #{record.status,jdbcType=INTEGER},
       iconimg = #{record.iconimg,jdbcType=VARCHAR},
       hospitalId = #{record.hospitalid,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=INTEGER}
+      phone = #{record.phone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -270,7 +269,7 @@
         hospitalId = #{hospitalid,jdbcType=INTEGER},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -285,23 +284,9 @@
       status = #{status,jdbcType=INTEGER},
       iconimg = #{iconimg,jdbcType=VARCHAR},
       hospitalId = #{hospitalid,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=INTEGER}
+      phone = #{phone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -317,4 +302,25 @@
   <select id="selectasRoleList" resultType="java.lang.Integer">
     SELECT roleid  from user_role WHERE userid = #{id};
   </select>
+  <select id="searchUserList" resultType="com.my.spd.pojo.User">
+    SELECT distinct u.* from `user` AS u LEFT JOIN user_role AS r ON u.id = r.userid
+    <where>
+      <if test="name != null">
+        and u.name like concat('%',#{name},'%')
+      </if>
+      <if test="hospitalId != null">
+        and u.hospitalId = #{hospitalId}
+      </if>
+      <if test="roleid != null">
+        and r.roleid = #{roleid}
+      </if>
+    </where>
+  </select>
+
+
+
+
+
+
+
 </mapper>

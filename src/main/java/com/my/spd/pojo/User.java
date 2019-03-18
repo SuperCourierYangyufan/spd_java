@@ -1,9 +1,8 @@
 package com.my.spd.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class User {
     private Integer id;
 
     private String username;
@@ -22,7 +21,7 @@ public class User implements Serializable {
 
     private Integer hospitalid;
 
-    private Integer phone;
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -96,11 +95,11 @@ public class User implements Serializable {
         this.hospitalid = hospitalid;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 }

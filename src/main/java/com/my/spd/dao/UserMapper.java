@@ -1,5 +1,6 @@
 package com.my.spd.dao;
 
+import com.my.spd.message.SO.Management.UserSo;
 import com.my.spd.pojo.User;
 import com.my.spd.pojo.UserExample;
 import org.apache.ibatis.annotations.Param;
@@ -33,7 +34,7 @@ public interface UserMapper {
 
 
 
-
+    List<User> searchUserList(UserSo userSo);
 
     List<Integer> selectasRoleList(Integer id);
 }

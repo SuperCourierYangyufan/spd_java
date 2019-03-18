@@ -1,6 +1,9 @@
 package com.my.spd.service.System.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.my.spd.dao.UserMapper;
+import com.my.spd.message.SO.Management.UserSo;
 import com.my.spd.pojo.User;
 import com.my.spd.pojo.UserExample;
 import com.my.spd.service.System.UserService;
@@ -26,5 +29,13 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return users.get(0);
+    }
+
+    @Override
+    public PageInfo<User> searchUserList(UserSo userSo) {
+        PageHelper.startPage(userSo.getPageNum(), userSo.getPageSize());
+        List<User> list = userMapper.searchUserList(userSo);
+        PageInfo<User> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 }
