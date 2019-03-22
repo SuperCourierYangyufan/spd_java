@@ -48,8 +48,13 @@ public class ShiroConfig {
         //静态文件放行
         filterChainDefinitionMap.put("/static/**", "anon");
         //其他
+        //登入
         filterChainDefinitionMap.put("/login", "anon");
+        //检查登入
+        filterChainDefinitionMap.put("/isLogin", "anon");
+        //无权限
         filterChainDefinitionMap.put("/notPermission", "anon");
+        //验证跳转
         filterChainDefinitionMap.put("/management/activateUser/*", "anon");
         //swagger
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");

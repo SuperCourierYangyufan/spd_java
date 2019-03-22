@@ -47,6 +47,12 @@ public class SystemController {
                 return loginmodle.fail(e.getMessage());
             }
         }
+
+        return getCurrentUserInfo();
+    }
+
+
+    private loginmodle getCurrentUserInfo(){
         //用户信息
         User currentUser = systemService.getUser();
         if (currentUser == null) {
@@ -70,6 +76,8 @@ public class SystemController {
         }
         return loginmodle.success(currentUser, menuList, roleList); //成功
     }
+
+
 
     private MessageModel removeUser(){
         try {
@@ -109,6 +117,12 @@ public class SystemController {
     @GetMapping("/login")
     public MessageModel login(){
         return MessageModel.fail("登入异常,请重新退出后登入");
+    }
+
+    @ApiOperation(value = "判断是否登入",httpMethod = "GET")
+    @GetMapping("/isLogin")
+    public loginmodle isLogin(){
+        return getCurrentUserInfo();
     }
 
 }
