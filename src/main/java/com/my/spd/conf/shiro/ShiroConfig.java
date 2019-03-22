@@ -52,6 +52,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon");
         //检查登入
         filterChainDefinitionMap.put("/isLogin", "anon");
+        //druid
+        filterChainDefinitionMap.put("/druid/**", "anon");
         //无权限
         filterChainDefinitionMap.put("/notPermission", "anon");
         //验证跳转
