@@ -27,7 +27,7 @@ public class swaggerConfig   {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("SPD项目接口文档")
-                .description("By 杨宇帆 毕业设计 git:https://github.com/SuperCourierYangyufan/-spd")
+                .description("By 杨宇帆 毕业设计 git:https://github.com/SuperCourierYangyufan")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();
