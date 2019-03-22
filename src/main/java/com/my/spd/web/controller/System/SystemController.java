@@ -40,7 +40,7 @@ public class SystemController {
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-            token.setRememberMe(true); //设置记住我
+            token.setRememberMe(false); //设置记住我
             try {
                 subject.login(token); //传入realm
             } catch (AuthenticationException e) {
@@ -50,30 +50,45 @@ public class SystemController {
         //用户信息
         User currentUser = systemService.getUser();
         if (currentUser == null) {
+            removeUser();
             return loginmodle.fail("用户出现异常");
+        } else if(currentUser.getStatus() == 0){
+            removeUser();
+            return loginmodle.fail("该用户尚未激活");
         }
         //获取菜单
         List<List<Menu>> menuList = systemService.getCurrentUserMenuList();
         if (menuList == null) {
+            removeUser();
             return loginmodle.fail("菜单出现异常");
         }
         //获取role对象
         List<Role> roleList = systemService.getCurrentUserRole();
         if (roleList == null) {
+            removeUser();
             return loginmodle.fail("权限列表出现异常");
         }
         return loginmodle.success(currentUser, menuList, roleList); //成功
     }
 
-    @ApiOperation(value = "用户登出", httpMethod = "GET")
-    @GetMapping("/logout")
-    public MessageModel logout() {
+    private MessageModel removeUser(){
         try {
             systemService.removeUser();
             Subject subject = SecurityUtils.getSubject();
             subject.logout();
+            return null;
         } catch (Exception e) {
             return MessageModel.fail(e.getMessage());
+        }
+    }
+
+
+    @ApiOperation(value = "用户登出", httpMethod = "GET")
+    @GetMapping("/logout")
+    public MessageModel logout() {
+        MessageModel model = removeUser();
+        if(model!=null){
+            return model;
         }
         return MessageModel.success(null);
     }
@@ -88,6 +103,12 @@ public class SystemController {
     @GetMapping("/notPermission")
     public MessageModel notPermission() {
         return MessageModel.fail("您没有对应的权限");
+    }
+
+    @ApiOperation(value = "并非登入接口,当用户没有登入时,访问非暴露接口,便会访问该接口",httpMethod = "GET")
+    @GetMapping("/login")
+    public MessageModel login(){
+        return MessageModel.fail("登入异常,请重新退出后登入");
     }
 
 }

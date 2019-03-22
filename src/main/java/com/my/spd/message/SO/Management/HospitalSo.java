@@ -7,6 +7,7 @@ import com.my.spd.message.SO.BaseSo;
  * @create 2019-03-11
  */
 public class HospitalSo extends BaseSo {
+    private static final long serialVersionUID = -5478821491080164254L;
     private String address;
     private String type;
 

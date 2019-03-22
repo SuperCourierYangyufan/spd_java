@@ -20,6 +20,15 @@ spring:
     redis:
       host: 120.79.10.101
       port: 6379
+    mail:
+      username: yangyufan199691@163.com
+      password: YANG199691
+      host: smtp.163.com
+      properties:
+        mail:
+          smtp:
+            ssl:
+              enable: true
 mybatis:
     mapper-locations: classpath:mybatis/mapper/*.xml
     config-location: classpath:mybatis/mybatis-config.xml
@@ -43,3 +52,5 @@ com:
       pageSize: 10
       successCode: 0
       failCode: 1
+      javaAddress: http://localhost:8081
+      vueAddress: http://localhost:8080/#/check

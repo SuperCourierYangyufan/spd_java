@@ -104,7 +104,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.my.spd.pojo.User">
+
+    <insert id="insert" parameterType="com.my.spd.pojo.User">
     insert into user (id, username, password, 
       name, email, registerTime, 
       status, iconimg, hospitalId, 
@@ -181,6 +182,7 @@
       </if>
     </trim>
   </insert>
+
   <select id="countByExample" parameterType="com.my.spd.pojo.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
@@ -308,19 +310,29 @@
       <if test="name != null">
         and u.name like concat('%',#{name},'%')
       </if>
-      <if test="hospitalId != null">
-        and u.hospitalId = #{hospitalId}
+      <if test="hospitalid != null">
+        and u.hospitalid = #{hospitalid}
       </if>
       <if test="roleid != null">
         and r.roleid = #{roleid}
       </if>
     </where>
   </select>
-
-
-
-
-
-
+  <insert id="insertShowID" parameterType="com.my.spd.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user (id, username, password,
+      name, email, registerTime,
+      status, iconimg, hospitalId,
+      phone)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP},
+      #{status,jdbcType=INTEGER}, #{iconimg,jdbcType=VARCHAR}, #{hospitalid,jdbcType=INTEGER},
+      #{phone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertUserAndRole" parameterType="com.my.spd.pojo.User_Role">
+    insert into user_role(userid, roleid) value (#{userid},#{roleid})
+  </insert>
+  <delete id="deleteUserRoleById">
+    delete from user_role where userid = #{id};
+  </delete>
 
 </mapper>

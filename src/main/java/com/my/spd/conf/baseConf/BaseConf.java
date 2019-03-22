@@ -18,6 +18,12 @@ public class BaseConf {
     //执行失败状态吗
     private String failCode;
 
+    //后台地址
+    private String javaAddress;
+
+    //前台地址
+    private String vueAddress;
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -40,5 +46,21 @@ public class BaseConf {
 
     public void setFailCode(String failCode) {
         this.failCode = failCode;
+    }
+
+    public String getJavaAddress() {
+        return javaAddress;
+    }
+
+    public void setJavaAddress(String javaAddress) {
+        this.javaAddress = javaAddress;
+    }
+
+    public String getVueAddress() {
+        return vueAddress;
+    }
+
+    public void setVueAddress(String vueAddress) {
+        this.vueAddress = vueAddress;
     }
 }

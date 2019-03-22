@@ -92,15 +92,24 @@ public class SystemServiceImpl {
                     example.setOrderByClause("`sort` DESC");
                     List<Menu> menus = menuMapper.selectByExample(example);
                     if(menus.size()>0&&menus!=null){
-                        //根据第一个,最大的sort来确定数组大小
-//                    List<Menu>[] menuList = new List[menus.get(0).getSort()/100];
                         List<List<Menu>> menuList = new ArrayList<List<Menu>>();
-                        for (int i = 0; i <menus.get(0).getSort()/100 ; i++) {
-                            menuList.add(new ArrayList<Menu>());
+                        //添加进顶级节点
+                        List<Menu> collect = menus.stream()
+                                .filter(i -> i.getIstop().equals("1"))
+                                .sorted(Comparator.comparing(Menu::getSort))
+                                .collect(Collectors.toList());
+                        for (int i = 0; i <collect.size() ; i++) {
+                            ArrayList<Menu> arrayList = new ArrayList<>();
+                            arrayList.add(collect.get(i));
+                            menuList.add(arrayList);
                         }
                         for (Menu list : menus) {
-                            int i = ((int) Math.ceil(list.getSort() / 100.0)) - 1;
-                            menuList.get(i).add(list);
+                            menuList.forEach(i->{
+                                if(list.getParentid() == i.get(0).getId()){
+                                    //同一组
+                                    i.add(list);
+                                }
+                            });
                         }
 //                    ArrayList<List<Menu>> lists = new ArrayList<>(Arrays.asList(menuList));
                         menuList.forEach(i->{

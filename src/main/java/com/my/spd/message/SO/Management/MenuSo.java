@@ -6,6 +6,7 @@ import com.my.spd.message.SO.BaseSo;
  * Created by YangYuFan on 2019/2/27.
  */
 public class MenuSo extends BaseSo {
+    private static final long serialVersionUID = -6464233340946580489L;
     private Integer id;
 
     private String menuname;
