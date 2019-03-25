@@ -46,6 +46,8 @@ public class DictionaryServiceImpl implements DictionaryService {
             criteria.andNameLike("%"+dictionarySo.getName()+"%");
         }else if(StringUtils.isNoneBlank(dictionarySo.getCategory())){
             criteria.andCategoryEqualTo(dictionarySo.getCategory());
+        }else if(dictionarySo.getValue()!=null&&dictionarySo.getValue()!=0){
+            criteria.andValueEqualTo(dictionarySo.getValue());
         }
         List<Dictionary> dictionaries = dictionaryMapper.selectByExample(example);
         PageInfo<Dictionary> pageInfo = new PageInfo<>(dictionaries);

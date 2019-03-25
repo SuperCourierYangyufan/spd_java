@@ -11,6 +11,20 @@ public class DictionarySo extends BaseSo {
 
     private String category;
 
+    private Integer value;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
     public String getName() {
         return name;
     }

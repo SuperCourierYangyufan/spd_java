@@ -68,10 +68,15 @@ public class ShiroConfig {
 
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "anon");
-//        filterChainDefinitionMap.put("/admin.html", "perms[admin]");
+
+        //业务开放权限
+        filterChainDefinitionMap.put("/management/searchDictionary", "authc");
 
         //权限菜单
-        filterChainDefinitionMap.put("/management","perms[role1]");
+        filterChainDefinitionMap.put("/management/**","roles[role1]");
+        filterChainDefinitionMap.put("/mainroom/**","roles[role2]");
+        filterChainDefinitionMap.put("/mainroom/**","roles[role3]");
+
 
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->

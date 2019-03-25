@@ -40,7 +40,7 @@ public class SystemController {
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-            token.setRememberMe(false); //设置记住我
+            token.setRememberMe(true); //设置记住我
             try {
                 subject.login(token); //传入realm
             } catch (AuthenticationException e) {

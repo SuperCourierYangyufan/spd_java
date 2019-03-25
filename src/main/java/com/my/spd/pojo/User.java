@@ -1,8 +1,10 @@
 package com.my.spd.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -6408397483685692280L;
     private Integer id;
 
     private String username;
