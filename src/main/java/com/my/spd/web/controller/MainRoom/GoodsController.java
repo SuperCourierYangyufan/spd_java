@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 杨宇帆
@@ -51,6 +48,14 @@ public class GoodsController {
         if(goodsPageInfo!=null)
             return MessageModel.success(goodsPageInfo);
         return MessageModel.fail("查询异常");
+    }
+
+    @ApiOperation(value = "根据id删除商品",httpMethod = "GET")
+    @GetMapping("/removeGood/{id}")
+    public MessageModel removeGood(@ApiParam(name = "id",value = "商品主键") @PathVariable Integer id){
+        if(goodsService.removeGood(id))
+            return MessageModel.success(null,"删除成功");
+        return MessageModel.fail("只能删除本库添加的货物");
     }
 
 }

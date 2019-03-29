@@ -14,4 +14,6 @@ public interface GoodsService {
     boolean update(Goods goods);
 
     PageInfo<Goods> searchGoods(GoodsSo goodsSo);
+
+    boolean removeGood(Integer id);
 }
