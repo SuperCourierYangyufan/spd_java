@@ -1,5 +1,6 @@
 package com.my.spd.md5;
 
+import com.my.spd.conf.utils.OrderUtils;
 import com.my.spd.utils.md5.UserPasswordCheck;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Test;
@@ -16,7 +17,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Md5Test {
     @Test
     public void fun(){
-        SimpleHash hash = new UserPasswordCheck().check("root", "admin");
+        SimpleHash hash = new UserPasswordCheck().check("xiaohua", "123456");
         System.out.println(hash.toString());
+    }
+
+    @Test
+    public void fun2(){
+        System.out.println(OrderUtils.getLotNmber());
+        System.out.println(OrderUtils.getLotNmber());
+        System.out.println(OrderUtils.getLotNmber());
     }
 }

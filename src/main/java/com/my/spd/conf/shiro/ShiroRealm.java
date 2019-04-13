@@ -15,6 +15,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -59,8 +60,16 @@ public class ShiroRealm extends AuthorizingRealm {
         User principal = (User) principalCollection.getPrimaryPrincipal(); //获得用户名,或者是用户实体类
         //利用登入的用户信息来对当前用户角色进行授权
         Set<String> roles = new HashSet<>(); //权限列表
+        Iterator<String> iterator = roles.iterator();
         //从数据库获得权限级别
         List<Role> list = systemService.getCurrentUserRole();
+        //药房给药库权限
+        for(Role i :list){
+            if(i.getId().equals(3)){
+                i.setId(2);
+                break;
+            }
+        }
         //添加权限
         list.forEach(i->roles.add("role"+i.getId()));
         //创建SimpleAuthorizationInfo,添加权限列表进去

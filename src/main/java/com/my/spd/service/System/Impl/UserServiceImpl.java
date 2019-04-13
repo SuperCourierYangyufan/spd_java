@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         String random = Integer.toString(RandomUtils.nextInt(1000, 9999));
         logger.info("手机号为:"+phone+"发送一条短信,随机码为:"+random);
         //发送验证码
-//        messageSend.sendSMS(phone, random);
+//           messageSend.sendSMS(phone, random);
         return random;
     }
 

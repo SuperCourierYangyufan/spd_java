@@ -44,4 +44,6 @@ public interface UserMapper {
     Integer insertShowID(User user);
 
     int deleteUserRoleById(Integer id);
+
+    List<User> searchHaveWarehouseUsers();
 }

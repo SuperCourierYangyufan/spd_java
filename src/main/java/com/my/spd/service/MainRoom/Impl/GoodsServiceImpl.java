@@ -57,4 +57,8 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.deleteByPrimaryKey(id);
         return true;
     }
+    @Override
+    public Goods detailGoods(Integer id){
+        return goodsMapper.selectByPrimaryKey(id);
+    }
 }

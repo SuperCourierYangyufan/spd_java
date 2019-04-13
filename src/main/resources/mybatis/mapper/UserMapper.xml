@@ -300,7 +300,9 @@
 
 
 
-
+  <select id="searchHaveWarehouseUsers" resultType="com.my.spd.pojo.User">
+    select DISTINCT u.* from user u INNER JOIN user_role ur on u.id = ur.userid WHERE ur.roleid = 2
+  </select>
   <select id="selectasRoleList" resultType="java.lang.Integer">
     SELECT roleid  from user_role WHERE userid = #{id};
   </select>
@@ -318,7 +320,7 @@
       </if>
     </where>
   </select>
-  <insert id="insertShowID" parameterType="com.my.spd.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertShowID" parameterType="com.my.spd.pojo.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, username, password,
       name, email, registerTime,
       status, iconimg, hospitalId,

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.spd.dao.TransmissionMapper">
+  <resultMap id="BaseResultMap" type="com.my.spd.pojo.Transmission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="in_uid" jdbcType="INTEGER" property="inUid" />
+    <result column="out_uid" jdbcType="INTEGER" property="outUid" />
+    <result column="number" jdbcType="BIGINT" property="number" />
+    <result column="in_order_low" jdbcType="VARCHAR" property="inOrderLow" />
+    <result column="out_order_low" jdbcType="VARCHAR" property="outOrderLow" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_time, good_id, in_uid, out_uid, number, in_order_low, out_order_low, status
+  </sql>
+  <select id="selectByExample" parameterType="com.my.spd.pojo.TransmissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transmission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from transmission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from transmission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.my.spd.pojo.TransmissionExample">
+    delete from transmission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.my.spd.pojo.Transmission">
+    insert into transmission (id, create_time, good_id, 
+      in_uid, out_uid, number, 
+      in_order_low, out_order_low, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{goodId,jdbcType=INTEGER}, 
+      #{inUid,jdbcType=INTEGER}, #{outUid,jdbcType=INTEGER}, #{number,jdbcType=BIGINT}, 
+      #{inOrderLow,jdbcType=VARCHAR}, #{outOrderLow,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.my.spd.pojo.Transmission">
+    insert into transmission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="goodId != null">
+        good_id,
+      </if>
+      <if test="inUid != null">
+        in_uid,
+      </if>
+      <if test="outUid != null">
+        out_uid,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="inOrderLow != null">
+        in_order_low,
+      </if>
+      <if test="outOrderLow != null">
+        out_order_low,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodId != null">
+        #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="inUid != null">
+        #{inUid,jdbcType=INTEGER},
+      </if>
+      <if test="outUid != null">
+        #{outUid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=BIGINT},
+      </if>
+      <if test="inOrderLow != null">
+        #{inOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderLow != null">
+        #{outOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.my.spd.pojo.TransmissionExample" resultType="java.lang.Long">
+    select count(*) from transmission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update transmission
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodId != null">
+        good_id = #{record.goodId,jdbcType=INTEGER},
+      </if>
+      <if test="record.inUid != null">
+        in_uid = #{record.inUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.outUid != null">
+        out_uid = #{record.outUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=BIGINT},
+      </if>
+      <if test="record.inOrderLow != null">
+        in_order_low = #{record.inOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOrderLow != null">
+        out_order_low = #{record.outOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update transmission
+    set id = #{record.id,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      good_id = #{record.goodId,jdbcType=INTEGER},
+      in_uid = #{record.inUid,jdbcType=INTEGER},
+      out_uid = #{record.outUid,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=BIGINT},
+      in_order_low = #{record.inOrderLow,jdbcType=VARCHAR},
+      out_order_low = #{record.outOrderLow,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.my.spd.pojo.Transmission">
+    update transmission
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodId != null">
+        good_id = #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="inUid != null">
+        in_uid = #{inUid,jdbcType=INTEGER},
+      </if>
+      <if test="outUid != null">
+        out_uid = #{outUid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=BIGINT},
+      </if>
+      <if test="inOrderLow != null">
+        in_order_low = #{inOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderLow != null">
+        out_order_low = #{outOrderLow,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.my.spd.pojo.Transmission">
+    update transmission
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      good_id = #{goodId,jdbcType=INTEGER},
+      in_uid = #{inUid,jdbcType=INTEGER},
+      out_uid = #{outUid,jdbcType=INTEGER},
+      number = #{number,jdbcType=BIGINT},
+      in_order_low = #{inOrderLow,jdbcType=VARCHAR},
+      out_order_low = #{outOrderLow,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

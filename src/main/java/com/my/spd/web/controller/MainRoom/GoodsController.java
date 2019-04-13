@@ -58,4 +58,5 @@ public class GoodsController {
         return MessageModel.fail("只能删除本库添加的货物");
     }
 
+
 }

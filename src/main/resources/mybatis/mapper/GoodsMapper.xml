@@ -362,7 +362,23 @@
 
 
   <select id="searchGoods" resultType="com.my.spd.pojo.Goods">
-    select * from goods
+    select DISTINCT
+    name,
+    id,
+    uId,
+    create_time,
+    typeID,
+    typeName,
+    price,
+    produceTime,
+    ValidityPeriod,
+    ShelfLife,
+    roleId,
+    permission,
+    address,
+    hospitalId
+    FROM
+    goods
     <where>
       <if test="name!=null and name!=''">
         and name like <![CDATA[
